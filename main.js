@@ -28,11 +28,9 @@ function getNumber(){
                 return userNumber = false; 
             }
         }
-        console.log('userNumber - ', userNumber);
         return userNumber;
     }
 }
-
 
 let gameResult = function getHiddenNumber(){
     let hiddenNumber = 10;
@@ -41,11 +39,11 @@ let gameResult = function getHiddenNumber(){
     //если пользователь нажал - Отмена
     if(customNumber == false){
         alert('Игра окончена');
-        return false;
+        return;
     }
     if(customNumber() == false){
         alert('Игра окончена');
-        return false;
+        return;
     }
         if (customNumber() > hiddenNumber){
             alert("Загаданное число меньше");
@@ -57,7 +55,7 @@ let gameResult = function getHiddenNumber(){
         }
         else if (customNumber() == hiddenNumber){
             alert("Поздравляю, Вы угадали!!!");
-            return true;
+            return;
         }
 };
 gameResult();
