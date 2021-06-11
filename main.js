@@ -6,7 +6,7 @@
 let isNumber = function(n){
     return !isNaN(parseFloat(n)) && isFinite(n)
 };
-//функция проверки на null. false если не null
+//функция проверки на null. return false если не null
 function customNumberIsNull(customNumber){
     if (customNumber === null) {
         return true;
@@ -19,44 +19,44 @@ function getNumber(){
     if(customNumberIsNull(userNumber)){
         return false;        
     }
-    return function(){
-        //пока не будет введено число
-        while(!isNumber(userNumber)){
-            userNumber = prompt('Введите число');
-            //если нажали отмена
-            if(customNumberIsNull(userNumber)){
-                return userNumber = false; 
-            }
+    //пока не будет введено число
+    while(!isNumber(userNumber)){
+        userNumber = prompt('Введите число');
+        //если нажали отмена
+        if(customNumberIsNull(userNumber)){
+            return false; 
         }
-        return userNumber;
     }
+    return userNumber;
 }
 
+//функция логики игры
 let gameResult = function getHiddenNumber(){
+    //загаданное число
     let hiddenNumber = 10;
-    let customNumber = getNumber();
-    
-    //если пользователь нажал - Отмена
-    if(customNumber == false){
-        alert('Игра окончена');
-        return;
-    }
-    if(customNumber() == false){
-        alert('Игра окончена');
-        return;
-    }
-        if (customNumber() > hiddenNumber){
+
+    return function getResult(){
+        //введенное пользователем число
+        let customNumber = getNumber();
+        //если пользователь нажал - Отмена
+        if(customNumber == false){
+            alert('Игра окончена');
+            return;
+        }
+        if (customNumber > hiddenNumber){
             alert("Загаданное число меньше");
-            getHiddenNumber();
+            getResult();
         }
-        else if (customNumber() < hiddenNumber){
+        if (customNumber < hiddenNumber){
             alert("Загаданное число больше");
-            getHiddenNumber();
+            getResult();
         }
-        else if (customNumber() == hiddenNumber){
+        if (customNumber == hiddenNumber){
             alert("Поздравляю, Вы угадали!!!");
             return;
         }
+    };
 };
-gameResult();
 
+let game = gameResult();
+game();
